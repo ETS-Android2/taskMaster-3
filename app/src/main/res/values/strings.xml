@@ -27,4 +27,5 @@
     <string name="task_state">task state</string>
     <string name="task_title_name">title name</string>
     <string name="menu">MENU</string>
+    <string name="go_home">Go Home</string>
 </resources>
