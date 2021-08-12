@@ -9,7 +9,7 @@
 * Add Task Activity : allow you to add a new task with description
 * All Task Activity : show all your task
 * Setting Page: you can add your username.
-
+* ## now you can save yor tasks
 
 # give it a look :
 
@@ -19,6 +19,11 @@
 ![](taskB.jpg)
 ![](taskC.jpg)
 ![](taskD.jpg)
+![](SavedTask.png)
+![](DetailSavedTask.png)
+![](AddTask.png)
+
+
 
 
 
