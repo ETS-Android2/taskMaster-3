@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.android.taskmaster"
-        minSdkVersion 23
+        minSdkVersion 14
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -29,7 +29,7 @@ android {
 }
 
 dependencies {
-
+//    tools:overrideLibrary:"com.google.android.material"
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     testImplementation 'junit:junit:4.13.2'

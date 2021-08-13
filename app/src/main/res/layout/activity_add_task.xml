@@ -16,7 +16,8 @@
         android:layout_marginBottom="2dp"
         android:labelFor="@id/task_title_input"
         android:text="@string/task_title_txt"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:layout_marginRight="20dp" />
 
     <EditText
         android:id="@+id/task_title_input"
@@ -53,6 +54,20 @@
 
         />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Task State :"
+        android:textSize="25sp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        />
+
     <Button
         android:id="@+id/addTaskBtn"
         android:layout_width="wrap_content"
@@ -62,7 +77,9 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="1dp"
         android:baselineAligned="false"
-        android:text="@string/add_task_btn" />
+        android:text="@string/add_task_btn"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="30dp" />
 
     <Button
         android:id="@+id/goHome"
@@ -73,7 +90,9 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="190dp"
         android:baselineAligned="false"
-        android:text="@string/go_home" />
+        android:text="@string/go_home"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="30dp" />
 
     <TextView
         android:id="@+id/textView5"
@@ -83,7 +102,8 @@
         android:layout_marginTop="13dp"
         android:layout_marginBottom="14dp"
         android:labelFor="@id/total_task_no"
-        android:text="@string/total_task" />
+        android:text="@string/total_task"
+        android:layout_marginLeft="10dp" />
 
     <NumberPicker
         android:id="@+id/total_task_no"
@@ -92,6 +112,8 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="105dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="132dp" />
+        android:layout_marginBottom="132dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="60dp" />
 
 </LinearLayout>
