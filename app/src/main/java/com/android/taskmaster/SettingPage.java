@@ -1,5 +1,6 @@
 package com.android.taskmaster;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,11 @@ public class SettingPage extends AppCompatActivity {
             prefEditor.putString("Username",username);
             prefEditor.apply();
             Toast.makeText(SettingPage.this,"username updated",Toast.LENGTH_LONG).show();
+        });
+        Button goHome = SettingPage.this.findViewById(R.id.goHome_btn);
+        goHome.setOnClickListener(v -> {
+            Intent intent = new Intent(SettingPage.this,MainActivity.class);
+            startActivity(intent);
         });
     }
 }

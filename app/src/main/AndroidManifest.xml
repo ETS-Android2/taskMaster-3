@@ -12,8 +12,8 @@
         <activity android:name=".TaskDetailPage"/>
         <activity android:name=".SettingPage" />
         <activity android:name=".AllTask" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".AddTask">
+        <activity android:name=".AddTask" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

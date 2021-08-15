@@ -58,7 +58,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Task State :"
+        android:text="@string/task_state1"
         android:textSize="25sp" />
 
     <Spinner
@@ -73,27 +73,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="1dp"
-        android:baselineAligned="false"
-        android:text="@string/add_task_btn"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="30dp" />
+        android:layout_marginRight="30dp"
+        android:text="@string/add_task_btn" />
 
     <Button
         android:id="@+id/goHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="1sp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="190dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="1dp"
         android:baselineAligned="false"
-        android:text="@string/go_home"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="30dp" />
+        android:text="@string/go_home" />
 
+    <Button
+        android:id="@+id/go_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go_details" />
     <TextView
         android:id="@+id/textView5"
         android:layout_width="90dp"

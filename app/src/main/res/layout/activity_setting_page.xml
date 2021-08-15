@@ -9,8 +9,8 @@
     <TextView
         android:id="@+id/username_txt_view"
         android:layout_width="102dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="11dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="51dp"
         android:layout_marginTop="244dp"
         android:layout_marginEnd="146dp"
         android:text="@string/new_user_name"
@@ -18,7 +18,9 @@
         app:layout_constraintEnd_toStartOf="@+id/username_edit_txt"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="146dp" />
 
     <EditText
         android:id="@+id/username_edit_txt"
@@ -31,11 +33,12 @@
         android:hint="@string/new_username"
         android:autofillHints="none"
         android:inputType="textPersonName"
-        android:text="@string/username"
         app:layout_constraintBottom_toTopOf="@+id/save_username_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/username_txt_view"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="68dp"
+        android:layout_marginRight="90dp" />
 
     <Button
         android:id="@+id/save_username_btn"
@@ -46,6 +49,19 @@
         android:layout_marginEnd="162dp"
         android:layout_marginBottom="158dp"
         android:text="@string/save_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_txt_view" />
+    <Button
+        android:id="@+id/goHome_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="237dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/go_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -28,6 +28,8 @@
     <string name="task_title_name">title name</string>
     <string name="menu">MENU</string>
     <string name="go_home">Go Home</string>
+    <string name="go_details">Go Details</string>
+    <string name="task_state1">Task State :</string>
     <string-array name="task_state_menu">
         <item>new</item>
         <item>in progress</item>
