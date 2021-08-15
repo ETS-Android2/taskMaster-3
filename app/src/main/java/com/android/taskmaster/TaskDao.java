@@ -12,7 +12,7 @@ public interface TaskDao  {
     void insertOneTask(TaskItem taskItem);
 
 @Query("SELECT * FROM taskItem WHERE title_task LIKE :taskTitle")
-    TaskItem findByName(String taskTitle);
+TaskItem findByName(String taskTitle);
 
     @Query("SELECT * FROM taskitem")
     List<TaskItem> findAll();

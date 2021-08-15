@@ -6,7 +6,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class TaskItem {
+public final class  TaskItem {
     @PrimaryKey(autoGenerate = true)
     public long id;
 
@@ -36,6 +36,9 @@ public class TaskItem {
     public TaskItem(String title,String body) {
         this.title=title;
         this.body=body;
+    }
+
+    public TaskItem() {
     }
 
     public String getTitle() {

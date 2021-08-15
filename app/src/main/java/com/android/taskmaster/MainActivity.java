@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,14 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         TaskDao taskDao = db.taskDao();
         taskList = taskDao.findAll();
-
-
-
         RecyclerView taskRecycleView = findViewById(R.id.list);
-//        Matcher<View> strings = withId(R.id.list);
-        String strings = taskRecycleView.toString();
-        System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmm"+strings);
-        Log.i("MM", "onCreate: "+strings);
         viewAdapter = new ViewAdapter(taskList, new ViewAdapter.OnTaskItemClickListener() {
             @Override
             public void onTaskClicked(int position) {

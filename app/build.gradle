@@ -39,6 +39,15 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test:rules:1.4.0'
     androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:3.0.2"){
+        exclude group:'com.android,support',module: 'appcompat'
+        exclude group:'com.android,support',module: 'support-v4'
+        exclude group:'com.android,support',module: 'support-v7'
+        exclude group:'com.android,support',module: 'design'
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+
+    }
     // room dependencies
     def room_version = "2.3.0"
 
