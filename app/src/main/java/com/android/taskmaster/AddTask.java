@@ -28,8 +28,10 @@ public class AddTask extends AppCompatActivity {
         taskDao = database.taskDao();
 
         Button addTaskBtn = AddTask.this.findViewById(R.id.addTaskBtn);
+
         addTaskBtn.setOnClickListener(v -> {
             Spinner spinner =  findViewById(R.id.spinner);
+
 // Create an ArrayAdapter using the string array and a default spinner layout
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                     R.array.task_state_menu, android.R.layout.simple_spinner_item);
@@ -45,10 +47,12 @@ public class AddTask extends AppCompatActivity {
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-//                String taskState = (String) parent.getItemAtPosition(0);
+                String taskState = (String) parent.getItemAtPosition(0);
 
                 }
             });
+
+
             EditText taskTitle = AddTask.this.findViewById(R.id.task_title_input);
             EditText taskDesc = AddTask.this.findViewById(R.id.task_desc);
             String title = taskTitle.getText().toString();
@@ -58,7 +62,7 @@ public class AddTask extends AppCompatActivity {
                 TaskItem taskItem = new TaskItem(title,body);
                 taskItem.setState(taskState);
                 taskDao.insertOneTask(taskItem);
-//                taskItem.setState(state);
+
 
                 Toast.makeText(AddTask.this, "Submitted!!", Toast.LENGTH_SHORT).show();
 
@@ -66,6 +70,8 @@ public class AddTask extends AppCompatActivity {
             else {
                 Toast.makeText(AddTask.this, "Please fill the form", Toast.LENGTH_LONG).show();
             }
+
+
         });
         Button goHome = AddTask.this.findViewById(R.id.goHome);
         goHome.setOnClickListener(v -> {

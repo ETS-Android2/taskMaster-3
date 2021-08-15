@@ -22,6 +22,10 @@
 ![](SavedTask.png)
 ![](DetailSavedTask.png)
 ![](AddTask.png)
+![](Screenshot_20210815-180606.png)
+![](Screenshot_20210815-180911.png)
+![](Screenshot_20210815-182350.png)
+
 
 
 
