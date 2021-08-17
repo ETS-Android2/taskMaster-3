@@ -37,7 +37,7 @@ public final class  TaskItem {
         this.title=title;
         this.body=body;
     }
-
+    @Ignore
     public TaskItem() {
     }
 

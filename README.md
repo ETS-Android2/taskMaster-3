@@ -11,6 +11,11 @@
 * Setting Page: you can add your username.
 * ## now you can save yor tasks
 
+# awsAmazon 
+## Amplify 
+> Amplify initiated Successfully 
+
+
 # give it a look :
 
 ![](RecyculerList1.jpg)
@@ -25,6 +30,7 @@
 ![](Screenshot_20210815-180606.png)
 ![](Screenshot_20210815-180911.png)
 ![](Screenshot_20210815-182350.png)
+![](Screenshot_20210817_210327.png)
 
 
 
