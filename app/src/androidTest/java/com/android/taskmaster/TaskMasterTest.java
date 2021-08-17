@@ -3,6 +3,7 @@ package com.android.taskmaster;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -58,11 +59,13 @@ public class TaskMasterTest  {
     @Test
     public void addTaskTest(){
         ActivityScenario scenario = rule.getScenario();
-
+        Matcher<View> strings = withId(R.id.list);
         onView(withId(R.id.addBtn)).perform(click());
         onView(withId(R.id.task_title_input)).perform(typeText("Task A"),ViewActions.closeSoftKeyboard());
         onView(withId(R.id.task_desc)).perform(typeText("Task A"),ViewActions.closeSoftKeyboard());
         onView(withId(R.id.addTaskBtn)).perform(click());
+//        List str = (TextView)withId(R.id.textView7);
+//        System.out.println("mmmmmmmmmmmmm"+str.getText().toString());
 //        onView(withId(R.id.list)).check(matches(isDisplayed()));
 //        onView(withText(endsWith("Task A"))).check(matches(isDisplayed()));
 //        Matcher<View> strings = withId(R.id.list);

@@ -17,6 +17,11 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
+import com.amplifyframework.datastore.generated.model.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,20 +47,40 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
+            Amplify.addPlugin(new AWSDataStorePlugin());
+            Amplify.configure(getApplicationContext());
+
+            Log.i("Tutorial", "Initialized Amplify");
+        } catch (AmplifyException e) {
+            Log.e("Tutorial", "Could not initialize Amplify", e);
+        }
+
+
+        Todo item = Todo.builder().name("mahmood").build();
+Amplify.DataStore.save(item,
+        success -> Log.i("Tutorial","Item Saved "+ success.item().getName()),
+        error -> Log.e("Tutorial","not Saved",error)
+        );
+
+
+        Amplify.DataStore.query(Todo.class,
+                todos -> {
+                    while (todos.hasNext()) {
+                        Todo todo = todos.next();
+                        Log.i("Tutorial", "==== Todo ====");
+                        Log.i("Tutorial", "Name: " + todo.getName());
+                    }
+                },
+                failure -> Log.e("Tutorial", "Could not query DataStore", failure)
+        );
 
         AppDB db = Room.databaseBuilder(getApplicationContext(),
                 AppDB.class, AddTask.TASK).allowMainThreadQueries().build();
 
         TaskDao taskDao = db.taskDao();
         taskList = taskDao.findAll();
-
-
-
         RecyclerView taskRecycleView = findViewById(R.id.list);
-//        Matcher<View> strings = withId(R.id.list);
-        String strings = taskRecycleView.toString();
-        System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmm"+strings);
-        Log.i("MM", "onCreate: "+strings);
         viewAdapter = new ViewAdapter(taskList, new ViewAdapter.OnTaskItemClickListener() {
             @Override
             public void onTaskClicked(int position) {
