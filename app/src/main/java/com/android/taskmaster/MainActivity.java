@@ -2,7 +2,12 @@ package com.android.taskmaster;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.preference.PreferenceManager;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +23,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.Todo;
@@ -28,11 +35,14 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ViewAdapter viewAdapter;
-    private List<TaskItem> taskList;
+//    private List<TaskItem> taskList;//Room Using
+    private List<com.amplifyframework.datastore.generated.model.TaskItem> taskLists = TaskManager.getInstance().getData();
 
     public static final String TITLE = "title";
     public static final String BODY = "body";
     public static final String STATE = "state";
+    RecyclerView taskRecycleView;
+//    Handler handler;
     @Override
     protected void onResume (){
         super.onResume();
@@ -46,48 +56,74 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         try {
+            Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSDataStorePlugin());
             Amplify.configure(getApplicationContext());
-
             Log.i("Tutorial", "Initialized Amplify");
-        } catch (AmplifyException e) {
-            Log.e("Tutorial", "Could not initialize Amplify", e);
+        } catch (AmplifyException failure) {
+            Log.e("Tutorial", "Could not initialize Amplify", failure);
         }
 
+//        try {
+//            Amplify.addPlugin(new AWSDataStorePlugin());
+//            Amplify.configure(getApplicationContext());
+//
+//            Log.i("Tutorial", "Initialized Amplify");
+//        } catch (AmplifyException e) {
+//            Log.e("Tutorial", "Could not initialize Amplify", e);
+//        }
 
-        Todo item = Todo.builder().name("mahmood").build();
-Amplify.DataStore.save(item,
-        success -> Log.i("Tutorial","Item Saved "+ success.item().getName()),
-        error -> Log.e("Tutorial","not Saved",error)
-        );
+///**
+// * choose the attribute that i want to save
+// */
+//        Todo item = Todo.builder().name("mahmood").build();
+//
+//        /**
+//         * save In local Storage - like Room-
+//         */
+//        Amplify.DataStore.save(item,
+//        success -> Log.i("Tutorial","Item Saved "+ success.item().getName()),
+//        error -> Log.e("Tutorial","not Saved",error)
+//        );
+//
+///**
+// * get the data saved back
+// */
+//        Amplify.DataStore.query(Todo.class,
+//                todos -> {
+//                    while (todos.hasNext()) {
+//                        Todo todo = todos.next();
+//                        Log.i("Tutorial", "==== Todo ====");
+//                        Log.i("Tutorial", "Name: " + todo.getName());
+//                    }
+//                },
+//                failure -> Log.e("Tutorial", "Could not query DataStore", failure)
+//        );
 
 
-        Amplify.DataStore.query(Todo.class,
-                todos -> {
-                    while (todos.hasNext()) {
-                        Todo todo = todos.next();
-                        Log.i("Tutorial", "==== Todo ====");
-                        Log.i("Tutorial", "Name: " + todo.getName());
-                    }
-                },
-                failure -> Log.e("Tutorial", "Could not query DataStore", failure)
-        );
+//        handler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+//            @Override
+//            public boolean handleMessage(@NonNull Message msg) {
+//                taskRecycleView.getAdapter().notifyDataSetChanged();
+//
+//                return false;
+//            }
+//        });
+       getTasksFromAPI();
+//        AppDB db = Room.databaseBuilder(getApplicationContext(),
+//                AppDB.class, AddTask.TASK).allowMainThreadQueries().build();
 
-        AppDB db = Room.databaseBuilder(getApplicationContext(),
-                AppDB.class, AddTask.TASK).allowMainThreadQueries().build();
-
-        TaskDao taskDao = db.taskDao();
-        taskList = taskDao.findAll();
-        RecyclerView taskRecycleView = findViewById(R.id.list);
-        viewAdapter = new ViewAdapter(taskList, new ViewAdapter.OnTaskItemClickListener() {
+//        TaskDao taskDao = db.taskDao();
+//        taskList = taskDao.findAll();
+         taskRecycleView = findViewById(R.id.list);
+        viewAdapter = new ViewAdapter(taskLists, new ViewAdapter.OnTaskItemClickListener() {
             @Override
             public void onTaskClicked(int position) {
                 Intent detailsPage = new Intent(getApplicationContext(), TaskDetailPage.class);
-                detailsPage.putExtra(TITLE,taskList.get(position).getTitle());
-                detailsPage.putExtra(BODY,taskList.get(position).getBody());
-                detailsPage.putExtra(STATE,taskList.get(position).getState());
+                detailsPage.putExtra(TITLE,taskLists.get(position).getTitle());
+                detailsPage.putExtra(BODY,taskLists.get(position).getBody());
+                detailsPage.putExtra(STATE,taskLists.get(position).getState());
                 startActivity(detailsPage);
 
             }
@@ -114,32 +150,6 @@ Amplify.DataStore.save(item,
             }
         });
 
-
-
-//        taskList = new ArrayList<>();
-//        taskList.add(new TaskItem("Task A","Body A","New"));
-//        taskList.add(new TaskItem("Task B","Body B"," In Progres"));
-//        taskList.add(new TaskItem("Task C","Body C","Assign"));
-//        taskList.add(new TaskItem("Task D","Body D","Completed"));
-//        taskList.add(new TaskItem("Task E","Body E","New"));
-//        taskList.add(new TaskItem("Task F","Body F"," In Progres"));
-//        taskList.add(new TaskItem("Task I","Body I","New"));
-//        taskList.add(new TaskItem("Task J","Body J","Assign"));
-//        taskList.add(new TaskItem("Task K","Body K","Completed"));
-//        taskList.add(new TaskItem("Task L","Body L"," In Progres"));
-//        taskList.add(new TaskItem("Task M","Body M","New"));
-
-//       viewAdapter = new ViewAdapter(taskList, new ViewAdapter.OnTaskItemClickListener() {
-//           @Override
-//           public void onTaskClicked(int position) {
-//               Intent detailsPage= new Intent(getApplicationContext(),TaskDetailPage.class);
-//               detailsPage.putExtra(TITLE , taskList.get(position).getTitle());
-//               detailsPage.putExtra(BODY , taskList.get(position).getBody());
-//               detailsPage.putExtra(STATE , taskList.get(position).getState());
-//               startActivity(detailsPage);
-//
-//           }
-//       });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
                 this,
                 LinearLayoutManager.VERTICAL,
@@ -149,7 +159,20 @@ Amplify.DataStore.save(item,
         taskRecycleView.setAdapter(viewAdapter);
     }
 
+private void dataSetChanged(){viewAdapter.notifyDataSetChanged();}
 
+private void getTasksFromAPI(){
+    Amplify.API.query(ModelQuery.list(com.amplifyframework.datastore.generated.model.TaskItem.class),
+        response ->{
+
+            for(com.amplifyframework.datastore.generated.model.TaskItem item : response.getData()){
+                taskLists.add(item);
+                Log.i("coming","on create : the item is =>"+item.getTitle());
+            }
+        },
+    error -> Log.e("error","onCreate faild"+error.toString())
+    );
+}
 
 
 

@@ -1,6 +1,5 @@
 package com.android.taskmaster;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +9,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.datastore.generated.model.TaskItem;
+
 import java.util.List;
 
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder>{
-    private final List<TaskItem> taskItems;
+//    private final List<TaskItem> taskItems;
     private OnTaskItemClickListener listener;
+    private List<com.amplifyframework.datastore.generated.model.TaskItem> taskLists ;
 
 
-    public ViewAdapter(List<TaskItem> taskItems,OnTaskItemClickListener listener) {
-        this.taskItems = taskItems;
+//    public ViewAdapter(List<TaskItem> taskItems,OnTaskItemClickListener listener) {
+//        this.taskItems = taskItems;
+//        this.listener = listener;
+//    }
+
+    public ViewAdapter(List<com.amplifyframework.datastore.generated.model.TaskItem> taskLists, OnTaskItemClickListener listener) {
+        this.taskLists = taskLists;
         this.listener = listener;
     }
+
     public interface OnTaskItemClickListener {
         void onTaskClicked(int position);
     }
@@ -34,14 +42,16 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewAdapter.ViewHolder holder, int position) {
-        TaskItem item = taskItems.get(position);
+//        TaskItem item = taskItems.get(position);
+        TaskItem item = taskLists.get(position);
         holder.title.setText(item.getTitle());
 
     }
 
     @Override
     public int getItemCount() {
-        return taskItems.size();
+//        return taskItems.size();
+        return taskLists.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
