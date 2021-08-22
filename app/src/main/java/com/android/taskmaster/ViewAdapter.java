@@ -16,14 +16,11 @@ import java.util.List;
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder>{
 //    private final List<TaskItem> taskItems;
     private OnTaskItemClickListener listener;
-    private List<com.amplifyframework.datastore.generated.model.TaskItem> taskLists ;
-
-
+    private final List<com.amplifyframework.datastore.generated.model.TaskItem> taskLists ;
 //    public ViewAdapter(List<TaskItem> taskItems,OnTaskItemClickListener listener) {
 //        this.taskItems = taskItems;
 //        this.listener = listener;
 //    }
-
     public ViewAdapter(List<com.amplifyframework.datastore.generated.model.TaskItem> taskLists, OnTaskItemClickListener listener) {
         this.taskLists = taskLists;
         this.listener = listener;
@@ -65,6 +62,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder>{
 
         title=itemView.findViewById(R.id.task_title_name);
         body=itemView.findViewById(R.id.body);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
