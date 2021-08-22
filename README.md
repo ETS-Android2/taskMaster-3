@@ -19,8 +19,16 @@
 
 ## now you can add your task and save it cloudly on the api and restore it 
 
+## connected with *Cognito @Auth* to secure your account 
 
 # give it a look :
+![](Screenshot_20210822-224407.png)
+![](Screenshot_20210822-222912.png)
+![](Screenshot_20210822-222925.png)
+![](Screenshot_20210822-223101.png)
+![](Screenshot_20210822-223208.png)
+![](Screenshot_20210822-223227.png)
+![](Screenshot_20210822_222747.png)
 ![](AWSDynmoDB.png)
 ![](afterAWS.png)
 ![](RecyculerList1.jpg)

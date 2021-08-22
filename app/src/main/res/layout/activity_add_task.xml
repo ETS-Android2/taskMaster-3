@@ -67,7 +67,13 @@
         android:layout_height="50dp"
 
         />
+    <Spinner
+        android:id="@+id/spinnerTeam"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
 
+        />
+<!--    android:spinnerMode="dialog"-->
     <Button
         android:id="@+id/addTaskBtn"
         android:layout_width="wrap_content"
