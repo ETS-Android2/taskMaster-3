@@ -76,8 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-//        Amplify.addPlugin(new AWSCognitoAuthPlugin());
-
 
         try {
             Amplify.addPlugin(new AWSApiPlugin());
@@ -88,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         } catch (AmplifyException failure) {
             Log.e("Tutorial", "Could not initialize Amplify", failure);
         }
+
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         teamName = sharedPreferences.getString("TeamName","Team A");
 //        try {
@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
 ///**
 // * choose the attribute that i want to save
 // */
+
+
 //        Todo item = Todo.builder().name("mahmood").build();
 //
 //        /**
@@ -129,32 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 //       getTasksFromAPI();
-//
-            Amplify.API.query(ModelQuery.list(Team.class,Team.NAME.eq("Team A")),//,TaskItem.TEAM.contains("teamMember")
-                    response ->{
-                        Log.i("coming","on create : the item is =>"+teamName);
-                        for(Team item : response.getData()){
-                            handler.sendEmptyMessage(1);
-//                            taskLists.add(item);
-                            taskLists=item.getTaskitem();
-
-                            Log.i("coming","on create : the item is =>"+item.getTaskitem());
-
-                        }
-                        runOnUiThread(() ->{
-                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
-                                    this,
-                                    LinearLayoutManager.VERTICAL,
-                                    false);
-
-                            taskRecycleView.setLayoutManager(linearLayoutManager);
-                            taskRecycleView.setAdapter(viewAdapter);
-                            dataSetChanged();
-                        });
-                    },
-                    error -> Log.e("error","onCreate faild"+error.toString())
-            );
-//        Amplify.API.query(
+        //        Amplify.API.query(
 //                ModelQuery.list(Team.class, Team),
 //                response -> {
 //                    for (Todo todo : response.getData()) {
@@ -176,6 +153,50 @@ public class MainActivity extends AppCompatActivity {
 //                },
 //                error -> Log.e("error","onCreate faild"+error.toString())
 //        );
+//
+        //        AppDB db = Room.databaseBuilder(getApplicationContext(),
+//                AppDB.class, AddTask.TASK).allowMainThreadQueries().build();
+
+//        TaskDao taskDao = db.taskDao();
+//        taskList = taskDao.findAll();
+            Amplify.API.query(ModelQuery.list(Team.class,Team.NAME.eq("Team B")),//,TaskItem.TEAM.contains("teamMember")
+                    response ->{
+                        Log.i("coming","on create : the item is =>"+teamName);
+                        for(Team item : response.getData()){
+                            handler.sendEmptyMessage(1);
+//                            taskLists.add(item);
+                            taskLists=item.getTaskitem();
+
+                            Log.i("coming","on create : the item is =>"+item.getTaskitem());
+
+                        }
+                        runOnUiThread(() ->{
+                            taskRecycleView = findViewById(R.id.list);
+                            viewAdapter = new ViewAdapter(taskLists, new ViewAdapter.OnTaskItemClickListener() {
+                                @Override
+                                public void onTaskClicked(int position) {
+                                    Intent detailsPage = new Intent(getApplicationContext(), TaskDetailPage.class);
+                                    detailsPage.putExtra(TITLE,taskLists.get(position).getTitle());
+                                    detailsPage.putExtra(BODY,taskLists.get(position).getBody());
+                                    detailsPage.putExtra(STATE,taskLists.get(position).getState());
+                                    startActivity(detailsPage);
+
+                                }
+                            });
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                                    this,
+                                    LinearLayoutManager.VERTICAL,
+                                    false);
+
+                            taskRecycleView.setLayoutManager(linearLayoutManager);
+                            taskRecycleView.setAdapter(viewAdapter);
+                            Log.i("viewAdapter","on create : the item is =>"+taskLists);
+//                            dataSetChanged();
+                        });
+                    },
+                    error -> Log.e("error","onCreate faild"+error.toString())
+            );
+
 
 
         handler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
@@ -185,24 +206,9 @@ public class MainActivity extends AppCompatActivity {
 
                 return false;
             }
-        });
-//        AppDB db = Room.databaseBuilder(getApplicationContext(),
-//                AppDB.class, AddTask.TASK).allowMainThreadQueries().build();
+        }); //maybe it useless now
 
-//        TaskDao taskDao = db.taskDao();
-//        taskList = taskDao.findAll();
-         taskRecycleView = findViewById(R.id.list);
-        viewAdapter = new ViewAdapter(taskLists, new ViewAdapter.OnTaskItemClickListener() {
-            @Override
-            public void onTaskClicked(int position) {
-                Intent detailsPage = new Intent(getApplicationContext(), TaskDetailPage.class);
-                detailsPage.putExtra(TITLE,taskLists.get(position).getTitle());
-                detailsPage.putExtra(BODY,taskLists.get(position).getBody());
-                detailsPage.putExtra(STATE,taskLists.get(position).getState());
-                startActivity(detailsPage);
 
-            }
-        });
         ImageButton menuBtn = findViewById(R.id.imageButton);
         menuBtn.setOnClickListener(v -> {
             Intent menuIntent = new Intent(MainActivity.this,SettingPage.class);
@@ -223,6 +229,18 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,AddTask.class);
                 MainActivity.this.startActivity(intent);
             }
+        });
+        Button logOut = MainActivity.this.findViewById(R.id.log_out);
+        logOut.setOnClickListener(v -> {
+            Intent logout = new Intent(getApplicationContext(),SigninActivity.class);
+            Amplify.Auth.signOut(
+                    () -> {
+                        Log.i("AuthQuickstart", "Signed out successfully");
+                        MainActivity.this.startActivity(logout);
+                    },
+                    error -> Log.e("AuthQuickstart", error.toString())
+            );
+
         });
     }
 
