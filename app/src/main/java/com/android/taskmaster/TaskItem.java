@@ -45,15 +45,19 @@ public final class  TaskItem {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+// --Commented out by Inspection START (8/25/21, 3:55 PM):
+//    public void setTitle(String title) {
+//        this.title = title;
+//    }
+// --Commented out by Inspection STOP (8/25/21, 3:55 PM)
 
     public String getBody() {
         return body;
     }
 
-    public void setBody(String body) {
-        this.body = body;
-    }
+// --Commented out by Inspection START (8/25/21, 3:55 PM):
+//    public void setBody(String body) {
+//        this.body = body;
+//    }
+// --Commented out by Inspection STOP (8/25/21, 3:55 PM)
 }

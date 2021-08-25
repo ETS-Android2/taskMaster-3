@@ -46,7 +46,6 @@ public class SettingPage extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                String teamName = (String) parent.getItemAtPosition(0);
 
 
             }

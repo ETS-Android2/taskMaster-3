@@ -1,54 +1,33 @@
 package com.android.taskmaster;
 
-import android.content.Context;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-import androidx.test.core.app.ActivityScenario;
-import androidx.test.espresso.ViewAssertion;
-import androidx.test.espresso.action.ViewActions;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.rule.ActivityTestRule;
-import androidx.recyclerview.widget.RecyclerView;
-
-import org.hamcrest.Matcher;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import static androidx.test.espresso.Espresso.closeSoftKeyboard;
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.core.StringEndsWith.endsWith;
+import android.view.View;
 
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import org.hamcrest.Matcher;
 import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 public class TaskMasterTest  {
-    private static final String TAG = "JUDY";
-    private TaskDao taskDao;
-    String taskState;
+    // --Commented out by Inspection (8/25/21, 3:54 PM):private static final String TAG = "JUDY";
+    // --Commented out by Inspection (8/25/21, 3:54 PM):private TaskDao taskDao;
+    // --Commented out by Inspection (8/25/21, 3:54 PM):String taskState;
     @Rule
-    public ActivityScenarioRule rule = new ActivityScenarioRule<>(MainActivity.class);
+    public final ActivityScenarioRule rule = new ActivityScenarioRule<>(MainActivity.class);
     @Test
     public void usernameTest(){
-        ActivityScenario scenario = rule.getScenario();
         onView(withId(R.id.imageButton)).perform(click());
         onView(withId(R.id.username_edit_txt)).perform(typeText("mahmood"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.save_username_btn)).perform(click());
@@ -58,8 +37,6 @@ public class TaskMasterTest  {
 
     @Test
     public void addTaskTest(){
-        ActivityScenario scenario = rule.getScenario();
-        Matcher<View> strings = withId(R.id.list);
         onView(withId(R.id.addBtn)).perform(click());
         onView(withId(R.id.task_title_input)).perform(typeText("Task A"),ViewActions.closeSoftKeyboard());
         onView(withId(R.id.task_desc)).perform(typeText("Task A"),ViewActions.closeSoftKeyboard());

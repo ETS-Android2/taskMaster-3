@@ -14,6 +14,7 @@ public class VarificationActivity extends AppCompatActivity {
     private static final String TAG = "VerificationActivity";
     private String username;
     private String password;
+    // --Commented out by Inspection (8/25/21, 3:53 PM):private String password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,18 +43,16 @@ public class VarificationActivity extends AppCompatActivity {
 
 //                    silentSignIn(username, password);
                 },
-                error -> {
-                    Log.e(TAG, "verification: failed" + error.toString());
-                });
+                error -> Log.e(TAG, "verification: failed" + error.toString()));
     }
 
-    void silentSignIn(String username, String password) {
-        Amplify.Auth.signIn(
-                username,
-                password,
-                success -> {
-                    Log.i(TAG, "signIn: worked " + success.toString());
-                },
-                error -> Log.e(TAG, "signIn: failed" + error.toString()));
-    }
+// --Commented out by Inspection START (8/25/21, 3:53 PM):
+//    void silentSignIn(String username, String password) {
+//        Amplify.Auth.signIn(
+//                username,
+//                password,
+//                success -> Log.i(TAG, "signIn: worked " + success.toString()),
+//                error -> Log.e(TAG, "signIn: failed" + error.toString()));
+//    }
+// --Commented out by Inspection STOP (8/25/21, 3:53 PM)
 }
