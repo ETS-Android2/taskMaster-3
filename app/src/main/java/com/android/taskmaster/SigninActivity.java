@@ -32,9 +32,7 @@ public class SigninActivity extends AppCompatActivity {
         EditText password = findViewById(R.id.mypass);
         TextView createNewAccount = findViewById(R.id.createnewac);
 
-        signIn.setOnClickListener(view -> {
-            signIn(username.getText().toString(), password.getText().toString());
-        });
+        signIn.setOnClickListener(view -> signIn(username.getText().toString(), password.getText().toString()));
 
         createNewAccount.setOnClickListener(view -> {
             Intent goToSignUp = new Intent(SigninActivity.this, SignupActivity.class);

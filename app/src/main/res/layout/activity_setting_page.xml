@@ -11,7 +11,6 @@
         android:id="@+id/username_txt_view"
         android:layout_width="142dp"
         android:layout_height="38dp"
-
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="39dp"
@@ -55,20 +54,20 @@
         app:layout_constraintStart_toEndOf="@+id/username_txt_view"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/save_username_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_marginStart="162dp"
-        android:layout_marginLeft="162dp"
-        android:layout_marginTop="307dp"
+        android:layout_marginTop="254dp"
         android:layout_marginEnd="162dp"
-        android:layout_marginRight="162dp"
         android:text="@string/save_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerTeam" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTeamS" />
 
     <Button
         android:id="@+id/goHome_btn"
@@ -80,12 +79,27 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="162dp"
         android:layout_marginRight="162dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="80dp"
         android:text="@string/go_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/save_username_btn" />
+    <Button
+        android:id="@+id/log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginLeft="162dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginRight="162dp"
+        android:layout_marginBottom="17dp"
+        android:text="Log Out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goHome_btn" />
 
     <Spinner
         android:id="@+id/spinnerTeamS"

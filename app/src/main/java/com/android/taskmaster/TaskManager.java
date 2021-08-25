@@ -21,9 +21,11 @@ public class TaskManager {
         return instance;
 
     }
-    public void setData(List<TaskItem> data) {
-        taskLists = data;
-    }
+// --Commented out by Inspection START (8/25/21, 3:55 PM):
+//    public void setData(List<TaskItem> data) {
+//        taskLists = data;
+//    }
+// --Commented out by Inspection STOP (8/25/21, 3:55 PM)
 
     public List<TaskItem> getData() {
         return taskLists;

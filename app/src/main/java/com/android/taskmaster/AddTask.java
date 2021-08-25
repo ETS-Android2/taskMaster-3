@@ -1,8 +1,5 @@
 package com.android.taskmaster;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,12 +11,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.amplifyframework.AmplifyException;
-import com.amplifyframework.api.aws.AWSApiPlugin;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.AWSDataStorePlugin;
-import com.amplifyframework.datastore.DataStoreException;
 import com.amplifyframework.datastore.generated.model.Team;
 
 public class AddTask extends AppCompatActivity {
@@ -73,7 +69,6 @@ public class AddTask extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                String taskState = (String) parent.getItemAtPosition(0);
 
 
             }
@@ -109,17 +104,11 @@ public class AddTask extends AppCompatActivity {
             String body = taskDesc.getText().toString();
             if (!taskTitle.getText().toString().equals("") && !taskDesc.getText().toString().equals("")) {
 
-                /**
-                 * save to Room
-                 */
                 TaskItem taskItem = new TaskItem(title, body);
                 taskItem.setState(taskState);
 
                 taskDao.insertOneTask(taskItem);
 
-                /**
-                 * Gathering Data to save  to DynamoDB
-                 */
                 Team team = Team.builder().name(teamName).build();
                 com.amplifyframework.datastore.generated.model.TaskItem taskItem1 = com.amplifyframework.datastore.generated.model.TaskItem.builder()
                         .title(title)
@@ -128,9 +117,6 @@ public class AddTask extends AppCompatActivity {
                         .state(taskState)
                         .build();
 
-                /**
-                 * Send to Api to Save
-                 */
                 Amplify.API.mutate(ModelMutation.create(taskItem1),
                         response -> Log.i("MyAmplify", "Added" + response.getData()),
                         error -> Log.e("MyAmplifyApp", "Create failed", error)

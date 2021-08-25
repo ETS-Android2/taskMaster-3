@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder>{
 //    private final List<TaskItem> taskItems;
-    private OnTaskItemClickListener listener;
+    private final OnTaskItemClickListener listener;
     private final List<com.amplifyframework.datastore.generated.model.TaskItem> taskLists ;
 //    public ViewAdapter(List<TaskItem> taskItems,OnTaskItemClickListener listener) {
 //        this.taskItems = taskItems;
@@ -34,7 +34,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder>{
     @Override
     public ViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
-        return new ViewHolder(view,listener);
+        return new ViewHolder(view, listener);
     }
 
     @Override
@@ -51,9 +51,10 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder>{
         return taskLists.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
-        TextView title;
-        TextView body;
+    static class ViewHolder extends RecyclerView.ViewHolder{
+        final TextView title;
+        final TextView body;
+        // --Commented out by Inspection (8/25/21, 3:53 PM):TextView body;
         ListView[] state;
 
 
@@ -64,12 +65,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder>{
         body=itemView.findViewById(R.id.body);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onTaskClicked(getAdapterPosition());
-                }
-            });
+            itemView.setOnClickListener(v -> listener.onTaskClicked(getAdapterPosition()));
         }
 
 
