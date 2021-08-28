@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TaskManager {
     private static TaskManager instance=null;
-    private List<TaskItem> taskLists = new ArrayList<>();
+    private final List<TaskItem> taskLists = new ArrayList<>();
 
 
     private TaskManager() {

@@ -20,12 +20,12 @@ public final class AmplifyModelProvider implements ModelProvider {
   }
   
 // --Commented out by Inspection START (8/25/21, 3:56 PM):
-//  public static AmplifyModelProvider getInstance() {
-//    if (amplifyGeneratedModelInstance == null) {
-//      amplifyGeneratedModelInstance = new AmplifyModelProvider();
-//    }
-//    return amplifyGeneratedModelInstance;
-//  }
+  public static AmplifyModelProvider getInstance() {
+    if (amplifyGeneratedModelInstance == null) {
+      amplifyGeneratedModelInstance = new AmplifyModelProvider();
+    }
+    return amplifyGeneratedModelInstance;
+  }
 // --Commented out by Inspection STOP (8/25/21, 3:56 PM)
 
   /** 
@@ -36,7 +36,7 @@ public final class AmplifyModelProvider implements ModelProvider {
   @Override
    public Set<Class<? extends Model>> models() {
     final Set<Class<? extends Model>> modifiableSet = new HashSet<>(
-          Arrays.asList(Todo.class, Team.class, TaskItem.class)
+          Arrays.<Class<? extends Model>>asList(Todo.class, Team.class, TaskItem.class)
         );
     
         return Immutable.of(modifiableSet);

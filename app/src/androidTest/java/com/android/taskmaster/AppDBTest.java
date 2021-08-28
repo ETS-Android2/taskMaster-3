@@ -52,6 +52,7 @@ public class AppDBTest {
         onView(withId(R.id.addTaskBtn)).perform(click());
         onView(withId(R.id.goHome)).perform(click());
         Espresso.onView(withId(R.id.list)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
+
 //        taskList = taskDao1.findAll();
 //        System.out.println(";;;;;;;;;;;"+taskList.toString());
 //        String byTitle = taskDao1.findByName("Task A");

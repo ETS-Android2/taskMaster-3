@@ -31,14 +31,21 @@
     <string name="go_details">Go Details</string>
     <string name="task_state1">Task State :</string>
     <string-array name="task_state_menu">
+        <item>null</item>
         <item>new</item>
         <item>in progress</item>
         <item>assign</item>
         <item>completed</item>
     </string-array>
     <string-array name="team_menu">
+        <item>null</item>
         <item>Team A</item>
         <item>Team B</item>
         <item>Team C</item>
+    </string-array>
+    <string-array name="file_attached">
+        <item>null</item>
+        <item>Image</item>
+        <item>Other</item>
     </string-array>
 </resources>
