@@ -35,6 +35,7 @@ public class PushListenerService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         Log.d(TAG, "Message: " + remoteMessage.getData());
+        Log.d("MSG", "Message: " + remoteMessage.getData());
 
         final NotificationClient notificationClient = MainActivity.getPinpointManager(getApplicationContext()).getNotificationClient();
 
@@ -48,6 +49,7 @@ public class PushListenerService extends FirebaseMessagingService {
 
         if (!NotificationClient.CampaignPushResult.NOT_HANDLED.equals(pushResult)) {
             if (NotificationClient.CampaignPushResult.APP_IN_FOREGROUND.equals(pushResult)) {
+
                 /* Create a message that will display the raw data of the campaign push in a dialog. */
                 final HashMap<String, String> dataMap = new HashMap<>(remoteMessage.getData());
                 broadcast(remoteMessage.getFrom(), dataMap);
@@ -62,6 +64,7 @@ public class PushListenerService extends FirebaseMessagingService {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
+
 // --Commented out by Inspection START (8/25/21, 3:56 PM):
 //    /**
 //     * Helper method to extract push message from bundle.
@@ -69,8 +72,8 @@ public class PushListenerService extends FirebaseMessagingService {
 //     * @param data bundle
 //     * @return message string from push notification
 //     */
-//    public static String getMessage(Bundle data) {
-//        return ((HashMap) data.get("data")).toString();
-//    }
+    public static String getMessage(Bundle data) {
+        return data.get("data").toString();
+    }
 // --Commented out by Inspection STOP (8/25/21, 3:56 PM)
 }

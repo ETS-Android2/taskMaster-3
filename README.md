@@ -21,6 +21,18 @@
 
 ## connected with *Cognito @Auth* to secure your account 
 
+
+## S3 
+#### WS Amplify Storage module provides a simple mechanism for managing user content for your app in public, protected or private storage buckets. The Storage category comes with built-in support for Amazon S3. There are two ways to add storage with Amplify - manual and automated. Both methods require the auth category with Amazon Cognito to also be enabled.
+
+## Notification 
+#### Enable your users to receive mobile push messages sent from the Apple (APNs) and Google (FCM/GCM) platforms. The CLI deploys your push notification backend using Amazon Pinpoint. You can also create Amazon Pinpoint campaigns that tie user behavior to push or other forms of messaging.
+
+## Analytics
+#### The Analytics category enables you to collect analytics data for your App. The Analytics category comes with built-in support for Amazon Pinpoint and Amazon Kinesis (Kinesis support is currently only available in the Amplify JavaScript library).
+
+
+
 # give it a look :
 ![](Screenshot_20210822-224407.png)
 ![](Screenshot_20210822-222912.png)
