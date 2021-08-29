@@ -1,13 +1,17 @@
 package com.android.taskmaster;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.FileUtils;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,6 +31,7 @@ import com.amplifyframework.datastore.generated.model.Team;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,7 +41,7 @@ public class AddTask extends AppCompatActivity {
     public static final String TASK = "task-container";
     private static final int REQUEST_FOR_FILE = 188;
     private static final String TAG = "AddTask";
-
+    private String uploadedFileName;
     private TaskDao taskDao;
     String taskState;
     String teamName;
@@ -46,6 +51,7 @@ public class AddTask extends AppCompatActivity {
     String title;
     Team teamType;
     List<Team> TeamMembers;
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -209,6 +215,22 @@ public class AddTask extends AppCompatActivity {
             });
 
 
+// Get intent, action and MIME type
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        Log.i("getIntent", "onCreate: " + type);
+        Log.i("getIntent", "onCreate: " + (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM));
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if (type.startsWith("image/")) {
+                try {
+                    onChooseFile((Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM)); // Handle single image being sent
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
     }
 //    private void configureAmplify(){
@@ -267,6 +289,48 @@ if (exctension.contains("image")||exctension.contains("image")){
 
 
     //to get and save file -->
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    private void onChooseFile(Uri uri) throws IOException {
 
+        uploadedFileName = new Date().toString() + "." + getMimeType(getApplicationContext(),uri);
+
+        File uploadFile = new File(getApplicationContext().getFilesDir(), "uploadFile");
+
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            FileUtils.copy(inputStream, new FileOutputStream(uploadFile));
+        } catch (Exception exception) {
+            Log.e("onChooseFile", "onActivityResult: file upload failed" + exception.toString());
+        }
+
+        Amplify.Storage.uploadFile(
+                uploadedFileName,
+                uploadFile,
+                success -> {
+                    Log.i("onChooseFile", "uploadFileToS3: succeeded " + success.getKey());
+                    Toast.makeText(getApplicationContext(), "Image Successfully Uploaded", Toast.LENGTH_SHORT).show();
+
+                },
+                error -> {
+                    Log.e("onChooseFile", "uploadFileToS3: failed " + error.toString());
+                    Toast.makeText(getApplicationContext(), "Image Upload failed", Toast.LENGTH_SHORT).show();
+
+                }
+        );
+    }
+
+    public static String getMimeType(Context context, Uri uri) {
+        String extension;
+
+        if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+            final MimeTypeMap mime = MimeTypeMap.getSingleton();
+            extension = mime.getExtensionFromMimeType(context.getContentResolver().getType(uri));
+        } else {
+            extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
+
+        }
+
+        return extension;
+    }
 
 }

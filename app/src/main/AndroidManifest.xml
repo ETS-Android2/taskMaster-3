@@ -30,6 +30,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".SignupActivity"
@@ -47,7 +48,13 @@
             android:exported="true" />
         <activity
             android:name=".AddTask"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter >
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity" />
     </application>
 
